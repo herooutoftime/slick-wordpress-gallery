@@ -151,7 +151,7 @@ class Slick_Wordpress_Gallery_Public
 		$suffix_keys = array('centerPadding' => 'px');
 		foreach($atts as $k => $v) {
 			// Skip possible empty properties which would be converted to bool false and therefore would override defaults
-			if(empty($v) || $v == '')
+			if($v === '')
 				continue;
 			// Convert properties to valid slick properties
 			$_nk = lcfirst(str_replace('_', '', ucwords($k, '_')));
@@ -162,8 +162,12 @@ class Slick_Wordpress_Gallery_Public
 				unset($atts[$k]);
 			// Remove prefix `slick`
 			if(strpos($k, 'slick') !== FALSE) {
-				$slick_atts[lcfirst(str_replace('slick', '', $_nk))] = (int) $v;
+				if(filter_var($v, FILTER_VALIDATE_FLOAT))
+					$slick_atts[lcfirst(str_replace('slick', '', $_nk))] = (float) $v;
+				if(filter_var($v, FILTER_VALIDATE_INT))
+					$slick_atts[lcfirst(str_replace('slick', '', $_nk))] = (int) $v;
 			}
+
 			// Convert specified int values to bool values
 			if(in_array(lcfirst(str_replace('slick', '', $_nk)), $bool_keys)) {
 				$slick_atts[lcfirst(str_replace('slick', '', $_nk))] = (bool) $v;
@@ -201,16 +205,24 @@ class Slick_Wordpress_Gallery_Public
 			}
 		}
 
+		if(WP_SLICK_DEV && locate_template('slick/slider-item.php'))
+			$dev_notices[] = "Item template in theme folder `slick/` used";
+
+		if(count($slick_slides) === 0)
+			return false;
+
 		$slick_class = '';
 		$slick_attr = '';
 
-		if ($atts['slickUseSlick']) {
-			$slick_class = "slick";
-			// Remove as it's not relevant for the slider itself
-			unset($slick_atts['useSlick']);
-			$slick_attr = "data-slick='".json_encode($slick_atts) . "'";
-		}
+		$slick_class = "slick";
+		// Remove as it's not relevant for the slider itself
+		unset($slick_atts['useSlick']);
+		$slick_attr = "data-slick='".json_encode($slick_atts) . "'";
+
+		// Allows custom templates for slider items & wrapper
 		if(locate_template('slick/slider-wrapper.php')) {
+			if(WP_SLICK_DEV)
+				$dev_notices[] = "Wrapper template in theme folder `slick/` used";
 			ob_start();
 			include(locate_template('slick/slider-wrapper.php'));
 			$wrapper = ob_get_contents();
@@ -219,7 +231,8 @@ class Slick_Wordpress_Gallery_Public
 			$wrapper = "<div class='$slick_class' $slick_attr><div>" . implode('</div><div>', $slick_slides) . "</div></div>";
 		}
 		if(WP_SLICK_DEV)
-			$wrapper = '<pre>' . json_encode($slick_atts, JSON_PRETTY_PRINT) . '</pre>' . $wrapper;
+			$dev_notices[] = json_encode($slick_atts, JSON_PRETTY_PRINT);
+			$wrapper = '<pre>' . implode("\n", $dev_notices) . '</pre>' . $wrapper;
 		return $wrapper;
 	}
 }

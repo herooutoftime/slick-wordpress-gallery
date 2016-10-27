@@ -1,5 +1,7 @@
 # WP Slick Gallery
 
+![wp_slick_gallery_properties](https://cloud.githubusercontent.com/assets/1781080/19785554/13797642-9c9a-11e6-8af2-08b1d179e4d4.png)
+
 Easily turn WP gallery into a Slick slider. Enable the plugin, add/edit your galleries and set slick properties through custom gallery sidebar options.
 
 ## Description
@@ -47,7 +49,7 @@ I've tested it on 4.5.3 only as it was initially built for a customer only.
 
 ## Thanks
 
-[Slick](https://github.com/kenwheeler/slick/)
+[Ken Wheeler](https://github.com/kenwheeler) for [Slick](https://github.com/kenwheeler/slick/)
 
 ## WP-Info
 

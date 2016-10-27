@@ -287,6 +287,15 @@ class Slick_Wordpress_Gallery_Admin
         </label>
 
         <label class="setting">
+          <span><?php _e('Autoplay'); ?></span>
+          <select class="type" data-setting="slick_autoplay">
+            <option value="" selected>Choose</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </label>
+
+        <label class="setting">
           <span><?php _e('Autoplay Speed'); ?></span>
           <input type="number" data-setting="slick_autoplay_speed">
         </label>
@@ -316,6 +325,11 @@ class Slick_Wordpress_Gallery_Admin
             <option value="1">Yes</option>
             <option value="0">No</option>
           </select>
+        </label>
+
+        <label class="setting">
+          <span><?php _e('Dots class'); ?></span>
+          <input type="text" data-setting="slick_dots_class">
         </label>
 
         <label class="setting">
@@ -442,6 +456,11 @@ class Slick_Wordpress_Gallery_Admin
           </select>
         </label>
 
+        <label class="setting">
+          <span><?php _e('Responsive'); ?></span>
+          <textarea cols="30" rows="10" data-setting="slick_responsive"></textarea>
+        </label>
+
       </div>
 
     </script>
@@ -451,7 +470,8 @@ class Slick_Wordpress_Gallery_Admin
         var media = wp.media;
         // add your shortcode attribute and its default value to the
         // gallery settings list; $.extend should work as well...
-        _.extend(wp.media.gallery.defaults, {});
+        _.extend(wp.media.gallery.defaults, {
+        });
 
         // merge default gallery settings template with yours
         wp.media.view.Settings.Gallery = wp.media.view.Settings.Gallery.extend({

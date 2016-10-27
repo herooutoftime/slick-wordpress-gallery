@@ -126,7 +126,12 @@ class Slick_Wordpress_Gallery_Public
       'slick_autoplay_speed' => 5,
     ), $atts);
     $bool_keys = array('dots', 'arrows', 'infinite', 'draggable', 'fade', 'centerMode', 'adaptiveHeight', 'autoplay');
+    $dur_keys = array('autoplaySpeed', 'speed');
+    $suffix_keys = array('centerPadding' => 'px');
     foreach($atts as $k => $v) {
+      // Remove possible empty properties which would be converted to bool false
+      if(empty($v) || $v == '')
+        continue;
       // Convert properties to valid slick properties
       $_nk = lcfirst(str_replace('_', '', ucwords($k, '_')));
       $atts[$_nk] = $v;
@@ -137,14 +142,17 @@ class Slick_Wordpress_Gallery_Public
       if(strpos($k, 'slick') !== FALSE) {
         $slick_atts[lcfirst(str_replace('slick', '', $_nk))] = (int) $v;
       }
+      // Convert specified int values to bool values
+      if(in_array(lcfirst(str_replace('slick', '', $_nk)), $bool_keys)) {
+        $slick_atts[lcfirst(str_replace('slick', '', $_nk))] = (bool) $v;
+      }
+      if(in_array(lcfirst(str_replace('slick', '', $_nk)), $dur_keys)) {
+        $slick_atts[lcfirst(str_replace('slick', '', $_nk))] = $v * 1000;
+      }
+      if(in_array(lcfirst(str_replace('slick', '', $_nk)), array_keys($suffix_keys))) {
+        $slick_atts[lcfirst(str_replace('slick', '', $_nk))] = $v . $suffix_keys[lcfirst(str_replace('slick', '', $_nk))];
+      }
     }
-    // Convert specified int values to bool values
-    foreach ($bool_keys as $bool_key) {
-      $slick_atts[$bool_key] = (bool) $slick_atts[$bool_key];
-    }
-    // Convert seconds to milliseconds
-    if($slick_atts['autoplaySpeed'] > 0)
-      $slick_atts['autoplaySpeed'] = $slick_atts['autoplaySpeed'] * 1000;
 
     $ids = explode(',', $atts['ids']);
     $include = explode(',', $atts['include']);
@@ -168,8 +176,9 @@ IMAGE;
     $slick_attr = '';
     if ($atts['slickUseSlick']) {
       $slick_class = "class='slick'";
+      // Remove as it's not relevant for the slider itself
+      unset($slick_atts['useSlick']);
       $slick_attr = "data-slick='".json_encode($slick_atts) . "'";
-//      $slick_attr = "data-slick='$slick_attr'";
     }
     return "<div $slick_class $slick_attr><div>" . implode('</div><div>', $o) . "</div></div>";
   }

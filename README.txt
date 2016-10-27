@@ -7,8 +7,7 @@ Stable tag: 4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Easily turn WP gallery into a Slick slider. Enable the plugin, add/edit your galleries and set slick properties
-through custom gallery sidebar options.
+Easily turn WP gallery into a Slick slider. Enable the plugin, add/edit your galleries and set slick properties through custom gallery sidebar options.
 
 == Description ==
 

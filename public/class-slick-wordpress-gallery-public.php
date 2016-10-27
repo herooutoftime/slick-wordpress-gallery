@@ -77,7 +77,8 @@ class Slick_Wordpress_Gallery_Public
      */
 
     wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/slick-wordpress-gallery-public.css', array(), $this->version, 'all');
-
+    wp_enqueue_style($this->plugin_name . '_slickcss_base', plugin_dir_url(__FILE__) . 'bower_components/slick-carousel/slick/slick.css', array(), $this->version, 'all');
+    wp_enqueue_style($this->plugin_name . '_slickcss_theme', plugin_dir_url(__FILE__) . 'bower_components/slick-carousel/slick/slick-theme.css', array(), $this->version, 'all');
   }
 
   /**
@@ -100,7 +101,8 @@ class Slick_Wordpress_Gallery_Public
      * class.
      */
 
-    wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/slick-wordpress-gallery-public.js', array('jquery'), $this->version, false);
+    wp_enqueue_script($this->plugin_name . '_slickjs', plugin_dir_url(__FILE__) . 'bower_components/slick-carousel/slick/slick.min.js', array('jquery'), $this->version, false);
+    wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/slick-wordpress-gallery-public.js', array($this->plugin_name . '_slickjs'), $this->version, false);
 
   }
 

@@ -23,163 +23,203 @@
 class Slick_Wordpress_Gallery_Public
 {
 
-  /**
-   * The ID of this plugin.
-   *
-   * @since    1.0.0
-   * @access   private
-   * @var      string $plugin_name The ID of this plugin.
-   */
-  private $plugin_name;
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string $plugin_name The ID of this plugin.
+	 */
+	private $plugin_name;
 
-  /**
-   * The version of this plugin.
-   *
-   * @since    1.0.0
-   * @access   private
-   * @var      string $version The current version of this plugin.
-   */
-  private $version;
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string $version The current version of this plugin.
+	 */
+	private $version;
 
-  /**
-   * Initialize the class and set its properties.
-   *
-   * @since    1.0.0
-   * @param      string $plugin_name The name of the plugin.
-   * @param      string $version The version of this plugin.
-   */
-  public function __construct($plugin_name, $version)
-  {
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since    1.0.0
+	 * @param      string $plugin_name The name of the plugin.
+	 * @param      string $version The version of this plugin.
+	 */
+	public function __construct($plugin_name, $version)
+	{
 
-    $this->plugin_name = $plugin_name;
-    $this->version = $version;
+		$this->plugin_name = $plugin_name;
+		$this->version = $version;
 
-  }
+	}
 
-  /**
-   * Register the stylesheets for the public-facing side of the site.
-   *
-   * @since    1.0.0
-   */
-  public function enqueue_styles()
-  {
+	/**
+	 * Register the stylesheets for the public-facing side of the site.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_styles()
+	{
 
-    /**
-     * This function is provided for demonstration purposes only.
-     *
-     * An instance of this class should be passed to the run() function
-     * defined in Slick_Wordpress_Gallery_Loader as all of the hooks are defined
-     * in that particular class.
-     *
-     * The Slick_Wordpress_Gallery_Loader will then create the relationship
-     * between the defined hooks and the functions defined in this
-     * class.
-     */
+		/**
+		 * This function is provided for demonstration purposes only.
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Slick_Wordpress_Gallery_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Slick_Wordpress_Gallery_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 */
 
-    wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/slick-wordpress-gallery-public.css', array(), $this->version, 'all');
-    wp_enqueue_style($this->plugin_name . '_slickcss_base', plugin_dir_url(__FILE__) . 'bower_components/slick-carousel/slick/slick.css', array(), $this->version, 'all');
-    wp_enqueue_style($this->plugin_name . '_slickcss_theme', plugin_dir_url(__FILE__) . 'bower_components/slick-carousel/slick/slick-theme.css', array(), $this->version, 'all');
-  }
+		if(WP_SLICK_CSS !== FALSE) {
+			wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/slick-wordpress-gallery-public.css', array(), $this->version, 'all');
+			wp_enqueue_style($this->plugin_name . '_slickcss_base', plugin_dir_url(__FILE__) . 'bower_components/slick-carousel/slick/slick.css', array(), $this->version, 'all');
+			wp_enqueue_style($this->plugin_name . '_slickcss_theme', plugin_dir_url(__FILE__) . 'bower_components/slick-carousel/slick/slick-theme.css', array(), $this->version, 'all');
+		}
+	}
 
-  /**
-   * Register the JavaScript for the public-facing side of the site.
-   *
-   * @since    1.0.0
-   */
-  public function enqueue_scripts()
-  {
+	/**
+	 * Register the JavaScript for the public-facing side of the site.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_scripts()
+	{
 
-    /**
-     * This function is provided for demonstration purposes only.
-     *
-     * An instance of this class should be passed to the run() function
-     * defined in Slick_Wordpress_Gallery_Loader as all of the hooks are defined
-     * in that particular class.
-     *
-     * The Slick_Wordpress_Gallery_Loader will then create the relationship
-     * between the defined hooks and the functions defined in this
-     * class.
-     */
+		/**
+		 * This function is provided for demonstration purposes only.
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Slick_Wordpress_Gallery_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Slick_Wordpress_Gallery_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 */
+		if(WP_SLICK_JS !== FALSE) {
+			$suffix = '.min';
+			if(WP_SLICK_DEV)
+				$suffix = '';
+			var_dump(plugin_dir_url(__FILE__) . 'bower_components/slick-carousel/slick/slick'.$suffix.'.js');
+			wp_enqueue_script($this->plugin_name . '_slickjs', plugin_dir_url(__FILE__) . 'bower_components/slick-carousel/slick/slick'.$suffix.'.js', array('jquery'), $this->version, false);
+			wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/slick-wordpress-gallery-public.js', array($this->plugin_name . '_slickjs'), $this->version, false);
+			wp_localize_script( $this->plugin_name, 'WP_SLICK', array(
+				'dev_mode' => WP_SLICK_DEV,
+				'css' => WP_SLICK_CSS,
+				'js' => WP_SLICK_JS,
+			));
+		}
+	}
 
-    wp_enqueue_script($this->plugin_name . '_slickjs', plugin_dir_url(__FILE__) . 'bower_components/slick-carousel/slick/slick.min.js', array('jquery'), $this->version, false);
-    wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/slick-wordpress-gallery-public.js', array($this->plugin_name . '_slickjs'), $this->version, false);
+	public function post_gallery( $output = '', $atts, $instance ) {
+		$return = $output; // fallback
+		if((bool) $atts['slick_use_slick'])
+			$slickified = $this->gallery_content( $atts );
 
-  }
+		// boolean false = empty, see http://php.net/empty
+		if( !empty( $slickified ) ) {
+			$return = $slickified;
+		}
+		return $return;
+	}
 
-  public function post_gallery( $output = '', $atts, $instance ) {
-    $return = $output; // fallback
-    if((bool) $atts['slick_use_slick'])
-      $my_result = $this->gallery_content( $atts );
+	public function gallery_content($atts)
+	{
+		$slick_slides = array();
+		$atts = array_merge(array(
+			'slick_arrows' => true,
+			'slick_autoplay' => true,
+			'slick_autoplay_speed' => 5,
+			'size' => 'thumbnail',
+			'link' => 'post',
+		), $atts);
 
-    // boolean false = empty, see http://php.net/empty
-    if( !empty( $my_result ) ) {
-      $return = $my_result;
-    }
-    return $return;
-  }
+		$ids = explode(',', $atts['ids']);
+		$include = explode(',', $atts['include']);
+		// Not the same - return: some issue
+		if (count(array_diff($ids, $include)) > 0)
+			return false;
 
-  public function gallery_content($atts)
-  {
-    $atts = array_merge(array(
-      'slick_arrows' => true,
-      'slick_autoplay' => true,
-      'slick_autoplay_speed' => 5,
-    ), $atts);
-    $bool_keys = array('dots', 'arrows', 'infinite', 'draggable', 'fade', 'centerMode', 'adaptiveHeight', 'autoplay');
-    $dur_keys = array('autoplaySpeed', 'speed');
-    $suffix_keys = array('centerPadding' => 'px');
-    foreach($atts as $k => $v) {
-      // Remove possible empty properties which would be converted to bool false
-      if(empty($v) || $v == '')
-        continue;
-      // Convert properties to valid slick properties
-      $_nk = lcfirst(str_replace('_', '', ucwords($k, '_')));
-      $atts[$_nk] = $v;
-      // Remove old properties
-      if($_nk !== $k)
-        unset($atts[$k]);
-      // Remove prefix `slick`
-      if(strpos($k, 'slick') !== FALSE) {
-        $slick_atts[lcfirst(str_replace('slick', '', $_nk))] = (int) $v;
-      }
-      // Convert specified int values to bool values
-      if(in_array(lcfirst(str_replace('slick', '', $_nk)), $bool_keys)) {
-        $slick_atts[lcfirst(str_replace('slick', '', $_nk))] = (bool) $v;
-      }
-      if(in_array(lcfirst(str_replace('slick', '', $_nk)), $dur_keys)) {
-        $slick_atts[lcfirst(str_replace('slick', '', $_nk))] = $v * 1000;
-      }
-      if(in_array(lcfirst(str_replace('slick', '', $_nk)), array_keys($suffix_keys))) {
-        $slick_atts[lcfirst(str_replace('slick', '', $_nk))] = $v . $suffix_keys[lcfirst(str_replace('slick', '', $_nk))];
-      }
-    }
+		$bool_keys = array('dots', 'arrows', 'infinite', 'draggable', 'fade', 'centerMode', 'adaptiveHeight', 'autoplay');
+		$dur_keys = array('autoplaySpeed', 'speed');
+		$suffix_keys = array('centerPadding' => 'px');
+		foreach($atts as $k => $v) {
+			// Skip possible empty properties which would be converted to bool false and therefore would override defaults
+			if(empty($v) || $v == '')
+				continue;
+			// Convert properties to valid slick properties
+			$_nk = lcfirst(str_replace('_', '', ucwords($k, '_')));
+			$v = preg_replace('/(\w+)\s{0,1}:/', '"\1":', str_replace(array("\r\n", "\r", "\n", "\t"), "", $v));
+			$atts[$_nk] = $v;
+			// Remove old properties
+			if($_nk !== $k)
+				unset($atts[$k]);
+			// Remove prefix `slick`
+			if(strpos($k, 'slick') !== FALSE) {
+				$slick_atts[lcfirst(str_replace('slick', '', $_nk))] = (int) $v;
+			}
+			// Convert specified int values to bool values
+			if(in_array(lcfirst(str_replace('slick', '', $_nk)), $bool_keys)) {
+				$slick_atts[lcfirst(str_replace('slick', '', $_nk))] = (bool) $v;
+			}
+			if(in_array(lcfirst(str_replace('slick', '', $_nk)), $dur_keys)) {
+				$slick_atts[lcfirst(str_replace('slick', '', $_nk))] = $v * 1000;
+			}
+			if(in_array(lcfirst(str_replace('slick', '', $_nk)), array_keys($suffix_keys))) {
+				$slick_atts[lcfirst(str_replace('slick', '', $_nk))] = $v . $suffix_keys[lcfirst(str_replace('slick', '', $_nk))];
+			}
+			if(lcfirst(str_replace('slick', '', $_nk)) === 'responsive') {
+				// Make `responsive` property valid
+				$slick_atts[lcfirst(str_replace('slick', '', $_nk))] = (array) json_decode('[' . $v . ']', true);
+			}
+		}
 
-    $ids = explode(',', $atts['ids']);
-    $include = explode(',', $atts['include']);
-    // Not the same - return: some issue
-    if (count(array_diff($ids, $include)) > 0)
-      return;
-    // Get gallery items
-    foreach ($include as $item) {
-      $meta = get_post($item);
-      $img_html = wp_get_attachment_image($item, $size, false, array('class' => 'img-responsive'));
-      $image = <<<IMAGE
-      <figure id="image-$item">
-        $img_html
-        <figcaption>{$meta->post_excerpt}</figcaption>
-      </figure>
-IMAGE;
-      $o[] = $image;
-    }
+		// Get gallery items
+		foreach ($include as $item) {
+			$meta = get_post($item);
+			if ( ! empty( $atts['link'] ) && 'file' === $atts['link'] ) {
+				$img_html = wp_get_attachment_link( $item, $atts['size'], false, false, false, array('class' => 'img-responsive') );
+			} elseif ( ! empty( $atts['link'] ) && 'none' === $atts['link'] ) {
+				$img_html = wp_get_attachment_image($item, $size, false, array('class' => 'img-responsive'));
+			} else {
+				$img_html = wp_get_attachment_link( $item, $atts['size'], true, false, false, array('class' => 'img-responsive') );
+			}
 
-    $slick_class = '';
-    $slick_attr = '';
-    if ($atts['slickUseSlick']) {
-      $slick_class = "class='slick'";
-      // Remove as it's not relevant for the slider itself
-      unset($slick_atts['useSlick']);
-      $slick_attr = "data-slick='".json_encode($slick_atts) . "'";
-    }
-    return "<div $slick_class $slick_attr><div>" . implode('</div><div>', $o) . "</div></div>";
-  }
+			if(locate_template('slick/slider-item.php')) {
+				ob_start();
+				include(locate_template('slick/slider-item.php'));
+				$slick_slides[] = ob_get_contents();
+				ob_end_clean();
+			} else {
+				$slick_slides[] = "<figure id='image-{$item}'>{$img_html}<figcaption>{$meta->post_excerpt}</figcaption></figure>";
+			}
+		}
+
+		$slick_class = '';
+		$slick_attr = '';
+
+		if ($atts['slickUseSlick']) {
+			$slick_class = "slick";
+			// Remove as it's not relevant for the slider itself
+			unset($slick_atts['useSlick']);
+			$slick_attr = "data-slick='".json_encode($slick_atts) . "'";
+		}
+		if(locate_template('slick/slider-wrapper.php')) {
+			ob_start();
+			include(locate_template('slick/slider-wrapper.php'));
+			$wrapper = ob_get_contents();
+			ob_end_clean();
+		} else {
+			$wrapper = "<div class='$slick_class' $slick_attr><div>" . implode('</div><div>', $slick_slides) . "</div></div>";
+		}
+		if(WP_SLICK_DEV)
+			$wrapper = '<pre>' . json_encode($slick_atts, JSON_PRETTY_PRINT) . '</pre>' . $wrapper;
+		return $wrapper;
+	}
 }

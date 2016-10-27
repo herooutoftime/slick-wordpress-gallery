@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA;;;GAGG;AAED,iBAAG;EACD,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,KAAK;EACd,KAAK,EAAE,IAAI;EACX,UAAU,EAAE,IAAI",
+"mappings": "AAAA;;;GAGG;AAED,iBAAG;EACD,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,KAAK;EACd,KAAK,EAAE,IAAI;EACX,UAAU,EAAE,IAAI;AAId,gEAAiB;EACf,KAAK,EAAE,GAAG;EACV,KAAK,EAAE,IAAI;AAEb,wDAAS;EACP,KAAK,EAAE,IAAI",
 "sources": ["slick-wordpress-gallery-admin.scss"],
 "names": [],
 "file": "slick-wordpress-gallery-admin.css"

@@ -7,5 +7,10 @@
   display: block;
   float: left;
   margin-top: 10px; }
+.media-sidebar #gallery-slick-settings .setting input[type=text] {
+  width: 50%;
+  float: left; }
+.media-sidebar #gallery-slick-settings .setting textarea {
+  width: 100%; }
 
 /*# sourceMappingURL=slick-wordpress-gallery-admin.css.map */

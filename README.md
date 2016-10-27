@@ -8,6 +8,7 @@ Wordpress plugin to easily turn any gallery into a Slick-driven slider.
 
 ## Installation
 
+1. Download the [ZIP](https://github.com/herooutoftime/slick-wordpress-gallery/archive/master.zip)
 1. Upload `slick-wordpress-gallery.php` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Done!
@@ -44,13 +45,14 @@ I've tested it on 4.5.3 only as it was initially built for a customer only.
 
 ## Thanks
 
-https://github.com/kenwheeler/slick/
+[Slick](https://github.com/kenwheeler/slick/)
 
 ## WP-Info
-Contributors: herooutoftime
-Tags: gallery, slick
-Requires at least: 4.2.1
-Tested up to: 4.5.3
-Stable tag: 4.5
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+* Contributors: herooutoftime
+* Tags: gallery, slick
+* Requires at least: 4.2.1
+* Tested up to: 4.5.3
+* Stable tag: 4.5
+* License: GPLv2 or later
+* License URI: http://www.gnu.org/licenses/gpl-2.0.html

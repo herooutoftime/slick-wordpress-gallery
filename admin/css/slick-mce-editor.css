@@ -1,0 +1,9 @@
+body#tinymce.wp-editor .wpview-type-gallery .slick-properties {
+  background: #3498db;
+  padding: 10px;
+  margin: 0 5px;
+  color: #fff; }
+  body#tinymce.wp-editor .wpview-type-gallery .slick-properties-title {
+    font-family: 'Pacifico', cursive; }
+
+/*# sourceMappingURL=slick-mce-editor.css.map */

@@ -133,9 +133,9 @@ class Slick_Wordpress_Gallery_Public
 	{
 		$slick_slides = array();
 		$atts = array_merge(array(
-			'slick_arrows' => true,
-			'slick_autoplay' => true,
-			'slick_autoplay_speed' => 5,
+//			'slick_arrows' => true,
+//			'slick_autoplay' => true,
+//			'slick_autoplay_speed' => 5,
 			'size' => 'thumbnail',
 			'link' => 'post',
 		), $atts);

@@ -205,7 +205,7 @@ class Slick_Wordpress_Gallery_Public
 			}
 		}
 
-		if(WP_SLICK_DEV && locate_template('slick/slider-item.php'))
+		if(WP_SLICK_DEV === TRUE && locate_template('slick/slider-item.php'))
 			$dev_notices[] = "Item template in theme folder `slick/` used";
 
 		if(count($slick_slides) === 0)
@@ -221,7 +221,7 @@ class Slick_Wordpress_Gallery_Public
 
 		// Allows custom templates for slider items & wrapper
 		if(locate_template('slick/slider-wrapper.php')) {
-			if(WP_SLICK_DEV)
+			if(WP_SLICK_DEV === TRUE)
 				$dev_notices[] = "Wrapper template in theme folder `slick/` used";
 			ob_start();
 			include(locate_template('slick/slider-wrapper.php'));
@@ -230,9 +230,10 @@ class Slick_Wordpress_Gallery_Public
 		} else {
 			$wrapper = "<div class='$slick_class' $slick_attr><div>" . implode('</div><div>', $slick_slides) . "</div></div>";
 		}
-		if(WP_SLICK_DEV)
+		if(WP_SLICK_DEV !== FALSE) {
 			$dev_notices[] = json_encode($slick_atts, JSON_PRETTY_PRINT);
 			$wrapper = '<pre>' . implode("\n", $dev_notices) . '</pre>' . $wrapper;
+		}
 		return $wrapper;
 	}
 }

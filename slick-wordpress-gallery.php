@@ -16,7 +16,7 @@
  * Plugin Name:       Slick Gallery
  * Plugin URI:        https://github.com/herooutoftime/slick-wordpress-gallery
  * Description:       Easily turn WP gallery into a Slick slider. Enable the plugin, add/edit your galleries and set slick properties through custom gallery sidebar options.
- * Version:           1.0.0
+ * Version:           1.0.2
  * Author:            Andreas Bilz
  * Author URI:        http://www.herooutoftime.com
  * License:           GPL-2.0+

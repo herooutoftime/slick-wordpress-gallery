@@ -106,7 +106,6 @@ class Slick_Wordpress_Gallery_Public
 			$suffix = '.min';
 			if(WP_SLICK_DEV)
 				$suffix = '';
-			var_dump(plugin_dir_url(__FILE__) . 'bower_components/slick-carousel/slick/slick'.$suffix.'.js');
 			wp_enqueue_script($this->plugin_name . '_slickjs', plugin_dir_url(__FILE__) . 'bower_components/slick-carousel/slick/slick'.$suffix.'.js', array('jquery'), $this->version, false);
 			wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/slick-wordpress-gallery-public.js', array($this->plugin_name . '_slickjs'), $this->version, false);
 			wp_localize_script( $this->plugin_name, 'WP_SLICK', array(

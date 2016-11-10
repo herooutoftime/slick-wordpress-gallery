@@ -229,7 +229,7 @@ class Slick_Wordpress_Gallery_Public
 		} else {
 			$wrapper = "<div class='$slick_class' $slick_attr><div>" . implode('</div><div>', $slick_slides) . "</div></div>";
 		}
-		if(WP_SLICK_DEV !== FALSE) {
+		if(WP_SLICK_DEV === TRUE) {
 			$dev_notices[] = json_encode($slick_atts, JSON_PRETTY_PRINT);
 			$wrapper = '<pre>' . implode("\n", $dev_notices) . '</pre>' . $wrapper;
 		}
